@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 
 // Importar rutas
-const pedidoRoutes = require('./routes/pedidoRoutes');
-const productoRoutes = require('./routes/productoRoutes');
+const pedidosRoutes = require('./routes/pedidosRoutes');
+const productosRoutes = require('./routes/productosRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -17,8 +17,8 @@ app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
 // Enrutamiento de la API REST
-app.use('/api/pedidos', pedidoRoutes);
-app.use('/api/productos', productoRoutes);
+app.use('/api/pedidos', pedidosRoutes);
+app.use('/api/productos', productosRoutes);
 
 // Ruta para la vista renderizada en Pug
 app.get('/', (req, res) => {

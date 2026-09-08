@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const productoController = require('../controllers/productoController');
+const productoControllers = require('../controllers/productoControllers');
 
 // GET /api/productos - Listar productos
-router.get('/', productoController.obtenerProductos);
+router.get('/', productoControllers.obtenerProductos);
 
 // POST /api/productos - Agregar producto
-router.post('/', productoController.crearProducto);
+router.post('/', productoControllers.crearProducto);
 
 module.exports = router;
