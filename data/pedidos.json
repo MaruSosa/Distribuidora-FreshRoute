@@ -4,9 +4,9 @@
     "clienteId": 1,
     "repartidorId": 1,
     "productos": [
-      { "productoId": 101, "cantidad": 5 }
+      { "productoId": 101, "cantidad": 10 }
     ],
     "estado": "Pendiente",
-    "fecha": "2026-09-08T17:30:00Z"
+    "fecha": "2026-09-08T18:00:00.000Z"
   }
 ]

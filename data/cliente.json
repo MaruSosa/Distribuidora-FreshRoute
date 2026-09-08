@@ -1,3 +1,4 @@
 [
-  { "id": 1, "nombre": "Restaurante Don Julio", "direccion": "Guatemala 4699", "telefono": "1112345678" }
+  { "id": 1, "nombre": "Restaurante Don Julio", "direccion": "Guatemala 4699", "telefono": "1112345678" },
+  { "id": 2, "nombre": "Pizzería Güerrin", "direccion": "Av. Corrientes 1368", "telefono": "1187654321" }
 ]
