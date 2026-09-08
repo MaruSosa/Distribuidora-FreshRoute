@@ -1,0 +1,4 @@
+[
+  { "id": 101, "nombre": "Carne Vacuna (kg)", "precio": 18000, "stock": 50 },
+  { "id": 102, "nombre": "queso", "precio": 8500, "stock": 20 }
+]
