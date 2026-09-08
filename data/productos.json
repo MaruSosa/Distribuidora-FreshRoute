@@ -1,0 +1,26 @@
+[
+  {
+    "id": 101,
+    "nombre": "Carne Vacuna (kg)",
+    "precio": 18000,
+    "stock": 50
+  },
+  {
+    "id": 102,
+    "nombre": "Queso Mozzarella",
+    "precio": 8500,
+    "stock": 20
+  },
+  {
+    "id": 103,
+    "nombre": "Manzanas Orgánicas",
+    "precio": 1500
+  },
+  {
+    "id": 104,
+    "nombre": "Manzanas Orgánicas",
+    "precio": 1500,
+    "categoria": "Frutas",
+    "stock": 50
+  }
+]
