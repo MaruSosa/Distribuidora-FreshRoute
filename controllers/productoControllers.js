@@ -1,40 +1,58 @@
 const fs = require('fs');
 const path = require('path');
 
+// Ruta absoluta hacia el archivo productos.json
 const productosPath = path.join(__dirname, '../data/productos.json');
 
-const leerProductos = () => JSON.parse(fs.readFileSync(productosPath, 'utf-8'));
-const guardarProductos = (datos) => fs.writeFileSync(productosPath, JSON.stringify(datos, null, 2));
-
-// Obtener catálogo de productos
-exports.obtenerProductos = (req, res) => {
-  try {
-    const productos = leerProductos();
-    res.status(200).json(productos);
-  } catch (error) {
-    res.status(500).json({ error: "Error al obtener el catálogo de productos." });
-  }
+// Función auxiliar para leer los productos del archivo JSON
+const leerProductos = () => {
+    const data = fs.readFileSync(productosPath, 'utf-8');
+    return JSON.parse(data);
 };
 
-// Crear un nuevo producto
-exports.crearProducto = (req, res) => {
-  try {
-    const { nombre, precio } = req.body;
-
-    if (!nombre || !precio || typeof precio !== 'number') {
-      return res.status(400).json({ error: "Nombre y precio (número) son obligatorios." });
+// 1. Obtener todos los productos (GET /api/productos)
+exports.obtenerProductos = (req, res) => {
+    try {
+        const productos = leerProductos();
+        res.status(200).json(productos);
+    } catch (error) {
+        res.status(500).json({ mensaje: 'Error al leer los productos', error: error.message });
     }
+};
 
-    const productos = leerProductos();
-    const nuevoId = productos.length > 0 ? Math.max(...productos.map(p => p.id)) + 1 : 101;
+// 2. Crear un nuevo producto (POST /api/productos)
+exports.crearProducto = (req, res) => {
+    try {
+        const { nombre, precio, categoria, stock } = req.body;
 
-    const nuevoProducto = { id: nuevoId, nombre, precio };
-    productos.push(nuevoProducto);
+        // Validación simple
+        if (!nombre || !precio) {
+            return res.status(400).json({ mensaje: 'El nombre y el precio son obligatorios.' });
+        }
 
-    guardarProductos(productos);
+        const productos = leerProductos();
 
-    res.status(201).json({ mensaje: "Producto registrado con éxito", producto: nuevoProducto });
-  } catch (error) {
-    res.status(500).json({ error: "Error al guardar el producto." });
-  }
+        // Generar un ID nuevo (autoincremental)
+        const nuevoId = productos.length > 0 ? productos[productos.length - 1].id + 1 : 1;
+
+        const nuevoProducto = {
+            id: nuevoId,
+            nombre,
+            precio: Number(precio),
+            categoria: categoria || 'General',
+            stock: Number(stock) || 0
+        };
+
+        productos.push(nuevoProducto);
+
+        // Guardar la lista actualizada de vuelta en el archivo JSON
+        fs.writeFileSync(productosPath, JSON.stringify(productos, null, 2), 'utf-8');
+
+        res.status(201).json({
+            mensaje: 'Producto guardado exitosamente',
+            producto: nuevoProducto
+        });
+    } catch (error) {
+        res.status(500).json({ mensaje: 'Error al guardar el producto', error: error.message });
+    }
 };

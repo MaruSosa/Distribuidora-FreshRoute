@@ -15,5 +15,12 @@
     "id": 103,
     "nombre": "Manzanas Orgánicas",
     "precio": 1500
+  },
+  {
+    "id": 104,
+    "nombre": "Manzanas Orgánicas",
+    "precio": 1500,
+    "categoria": "Frutas",
+    "stock": 50
   }
 ]
